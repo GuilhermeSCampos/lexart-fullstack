@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "sequelize-cli": "^6.6.2"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
