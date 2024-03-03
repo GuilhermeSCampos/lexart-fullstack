@@ -14,6 +14,8 @@ app.use("/phones", phoneRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 
+app.get("/", (_req, res) => res.send("Express on Vercel"));
+
 app.use(errrorMiddleware);
 
 module.exports = app;
