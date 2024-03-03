@@ -16,7 +16,7 @@ module.exports = {
       token = token.split(" ")[1];
     }
 
-    const data = await AuthService.validateToken(token);
+    const data = AuthService.validateToken(token);
 
     if (data.status === 401)
       return res.status(401).json({ message: data.message });

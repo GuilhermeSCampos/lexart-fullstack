@@ -1,7 +1,7 @@
 require("express-async-errors");
 const express = require("express");
 const { phoneRouter, userRouter, authRouter } = require("./routes");
-const errrorMiddleware = require("./middlewares/errorMiddleware");
+const errrorMiddleware = require("./middlewares/ErrorMiddleware");
 require("./database");
 const cors = require("cors");
 

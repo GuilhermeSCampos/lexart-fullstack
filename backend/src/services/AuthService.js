@@ -29,8 +29,8 @@ module.exports = {
       return { message: error.message, status: 401 };
     }
   },
-  validateToken: async (token) => {
-    const decoded = await jwt.ValidateToken(token);
+  validateToken: (token) => {
+    const decoded = jwt.ValidateToken(token);
 
     if (!decoded) {
       return { message: "Invalid token", status: 401 };
