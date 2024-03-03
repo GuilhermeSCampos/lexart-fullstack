@@ -1,41 +1,41 @@
-const User = require("../database/models/User");
-require("dotenv").config();
-const bcrypt = require("bcrypt");
-const jwt = require("../utils/jwt");
+// const User = require("../database/models/User");
+// require("dotenv").config();
+// const bcrypt = require("bcrypt");
+// const jwt = require("../utils/jwt");
 
-const secretKey = process.env.JWT_SECRET;
+// const secretKey = process.env.JWT_SECRET;
 
-module.exports = {
-  login: async (data) => {
-    try {
-      const { username, password } = data;
+// module.exports = {
+//   login: async (data) => {
+//     try {
+//       const { username, password } = data;
 
-      const user = await User.findOne({ where: { username } });
+//       const user = await User.findOne({ where: { username } });
 
-      if (!user) {
-        throw new Error("Invalid username or password");
-      }
+//       if (!user) {
+//         throw new Error("Invalid username or password");
+//       }
 
-      const comparePassword = await bcrypt.compare(password, user.password);
+//       const comparePassword = await bcrypt.compare(password, user.password);
 
-      if (!comparePassword) {
-        throw new Error("Invalid username or password");
-      }
+//       if (!comparePassword) {
+//         throw new Error("Invalid username or password");
+//       }
 
-      const token = jwt.createToken({ username });
+//       const token = jwt.createToken({ username });
 
-      return { message: token, status: 200 };
-    } catch (error) {
-      return { message: error.message, status: 401 };
-    }
-  },
-  validateToken: async (token) => {
-    const decoded = await jwt.ValidateToken(token);
+//       return { message: token, status: 200 };
+//     } catch (error) {
+//       return { message: error.message, status: 401 };
+//     }
+//   },
+//   validateToken: async (token) => {
+//     const decoded = await jwt.ValidateToken(token);
 
-    if (!decoded) {
-      return { message: "Invalid token", status: 401 };
-    }
+//     if (!decoded) {
+//       return { message: "Invalid token", status: 401 };
+//     }
 
-    return { message: decoded, status: 200 };
-  },
-};
+//     return { message: decoded, status: 200 };
+//   },
+// };
