@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Eye, EyeSlash } from "@phosphor-icons/react";
 import ReactLoading from "react-loading";
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { register } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWarning, setUsernameWarning] = useState(false);
@@ -17,7 +17,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (username.length < 3) {
       setUsernameWarning(true);
       return true;
@@ -30,11 +30,11 @@ const Login = () => {
       setUsernameWarning(false);
       setPasswordWarning(false);
       setLoading(true);
-      const auth = await login(username, password);
+      const auth = await register(username, password);
       if (auth) {
-        navigate("/dashboard");
+        navigate("/login");
       } else {
-        toast.error("Invalid username or password!");
+        toast.error("Username Already exists!");
       }
     }
     setLoading(false);
@@ -46,14 +46,14 @@ const Login = () => {
     <div className="bg-[#666666]/50 w-screen h-screen flex flex-col justify-center items-center ">
       <div className="w-full max-w-[600px] h-[500px] space-y-8 border-2 bg-white px-16 py-8 rounded-lg login-container animate-[fadeIn_1s_ease-in-out]">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-black">Welcome!</h1>
+          <h1 className="text-3xl font-bold text-black">Sign Up</h1>
         </div>
         <div className="w-10/12 mx-auto flex-col flex gap-8">
           <div>
             <h1 className="text-2xl mb-2">Username</h1>
             <input
               placeholder="Type your username here"
-              className="border-4 w-full h-12 rounded-md px-2"
+              className="border-4 w-full h-14 rounded-md px-2"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -63,6 +63,7 @@ const Login = () => {
               </span>
             )}
           </div>
+
           <div>
             <h1 className="text-2xl mb-2">Password</h1>
             <div className="flex flex-col">
@@ -95,7 +96,7 @@ const Login = () => {
             )}
           </div>
           <button
-            onClick={() => handleLogin()}
+            onClick={() => handleRegister()}
             className="w-5/12 bg-stone-600 text-white px-6 py-2 text-xl rounded-xl mx-auto"
           >
             {loading ? (
@@ -103,21 +104,21 @@ const Login = () => {
                 type="spin"
                 width={"25%"}
                 height={"25%"}
-                className="mx-auto animate-[fadeIn_1s_ease-in-out]"
+                className="mx-auto"
               />
             ) : (
-              "Login"
+              "Sign Up"
             )}
           </button>
-        </div>
-        <div className="text-center text-lg text-black">
-          Don't have an account?{" "}
-          <span
-            className="underline cursor-pointer"
-            onClick={() => navigate("/register")}
-          >
-            Sign up
-          </span>
+          <div className="text-center text-lg text-black">
+            Already have an account?{" "}
+            <span
+              className="underline cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Sign in
+            </span>
+          </div>
         </div>
       </div>
       <ToastContainer
@@ -137,4 +138,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
