@@ -61,6 +61,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return true;
   };
 
+  const fetchPhones = () => {
+    const token = JSON.parse(localStorage.getItem("token") || "{}").token;
+    fetch(`${BASE_URL}/phones`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, register }}>
       {children}

@@ -1,4 +1,5 @@
 const joiSchemas = require("../Validation/schemas");
+const jwt = require("../utils/jwt");
 
 const verifyUserSchema = (req, _res, next) => {
   const data = req.body;
@@ -22,7 +23,24 @@ const verifyTokenExists = (req, _res, next) => {
   return next();
 };
 
+const validateToken = (req, res, next) => {
+  let token = req.headers.authorization;
+
+  if (token.includes("Bearer ")) {
+    token = token.split(" ")[1];
+  }
+
+  const decoded = jwt.ValidateToken(token);
+
+  if (!decoded) {
+    return next({ message: "Expired or invalid token", status: 401 });
+  }
+
+  return next();
+};
+
 module.exports = {
   verifyUserSchema,
   verifyTokenExists,
+  validateToken,
 };
