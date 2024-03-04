@@ -148,9 +148,7 @@ const EditPhone = () => {
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
         draggable
-        pauseOnHover
         theme="light"
         transition={Bounce}
       />

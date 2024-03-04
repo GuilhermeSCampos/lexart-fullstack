@@ -18,7 +18,8 @@ const PhoneList = () => {
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
-
+  const [filtering, setFiltering] = useState("");
+  console.log(filtering);
   const getPhones = async () => {
     setLoading(true);
 
@@ -63,6 +64,22 @@ const PhoneList = () => {
     setSearchTimeout(newTimeout);
   };
 
+  const filterPhonesByPrice = () => {
+    if (filtering === "asc") {
+      setPhones((prev) => [...prev.sort((a, b) => a.price - b.price)]);
+    } else if (filtering === "desc") {
+      setPhones((prev) => [...prev.sort((a, b) => b.price - a.price)]);
+    }
+  };
+
+  const handleFilterOnText = () => {
+    if (filtering === "asc" || filtering === "") {
+      setFiltering("desc");
+    } else if (filtering === "desc") {
+      setFiltering("asc");
+    }
+  };
+
   useEffect(() => {
     getPhones();
   }, []);
@@ -74,6 +91,10 @@ const PhoneList = () => {
       handleSearchChange();
     }
   }, [search]);
+
+  useEffect(() => {
+    filterPhonesByPrice();
+  }, [filtering]);
 
   return loading ? (
     <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center justify-center ">
@@ -114,9 +135,30 @@ const PhoneList = () => {
                   {t("model")}
                 </th>
                 <th className="border border-gray-300 py-2 w-2/12">
-                  {t("price")}
-                  <ArrowUp size={32} />
-                  <ArrowDown size={32} />
+                  <div className="w-full flex items-center justify-center gap-1">
+                    <p
+                      className="cursor-pointer"
+                      onClick={() => handleFilterOnText()}
+                    >
+                      {t("price")}
+                    </p>
+
+                    {(filtering === "asc" || filtering === "") && (
+                      <ArrowUp
+                        className="cursor-pointer"
+                        size={20}
+                        onClick={() => setFiltering("desc")}
+                      />
+                    )}
+
+                    {filtering === "desc" && (
+                      <ArrowDown
+                        className="cursor-pointer"
+                        size={20}
+                        onClick={() => setFiltering("asc")}
+                      />
+                    )}
+                  </div>
                 </th>
                 <th className="border border-gray-300 py-2 w-2/12">
                   {t("color")}
