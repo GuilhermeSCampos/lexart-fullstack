@@ -43,8 +43,8 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#666666]/50 w-screen h-screen flex flex-col justify-center items-center ">
-      <div className="w-full max-w-[600px] h-[500px] space-y-8 border-2 bg-white px-16 py-8 rounded-lg login-container animate-[fadeIn_1s_ease-in-out]">
+    <div className="bg-gradient-to-br from-gray-300 to-[#57606f] w-screen h-screen flex flex-col justify-center items-center ">
+      <div className="w-full max-w-[600px] h-[500px] space-y-8 border-4 bg-white px-16 py-8 rounded-lg login-container animate-[fadeIn_1s_ease-in-out]">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-black">Welcome!</h1>
         </div>

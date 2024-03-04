@@ -17,6 +17,7 @@ interface AuthContextProps {
     price: number,
     color: string
   ) => Promise<boolean>;
+  removePhone: (id: number) => Promise<void>;
 }
 
 // Criar um contexto com um valor inicial vazio ({} as AuthContextProps)
@@ -145,6 +146,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return true;
   };
 
+  const removePhone = async (id: number) => {
+    const tokenString = localStorage.getItem("token");
+    const token = tokenString ? JSON.parse(tokenString) : "";
+
+    await fetch(`${BASE_URL}/phones/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -156,6 +170,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         username,
         validateToken,
         registerPhone,
+        removePhone,
       }}
     >
       {children}

@@ -35,17 +35,18 @@ const RegisterPhone = () => {
     setColor("");
     setLoading(false);
   };
+
   const onChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (value.match(/^\d+(\.\d{0,2})?$/) || value === "") {
+    if (value.match(/^\d{1,7}(\.\d{0,2})?$/) || value === "") {
       setPrice(value);
     }
   };
 
   return (
-    <div className="w-full flex flex-col gap-16">
-      <h1 className="text-4xl text-center">Register</h1>
+    <div className="w-full flex flex-col gap-16 [fadeIn_1s_ease-in-out]">
+      <h1 className="text-4xl text-center [fadeIn_1s_ease-in-out]">Register</h1>
       <form
         className="w-4/12 mx-auto h-auto flex flex-col items-center gap-8 bg-slate-200 rounded-xl py-8 hover:bg-slate-300 transition duration-300"
         onSubmit={(e) => handleSubmit(e)}
@@ -91,7 +92,7 @@ const RegisterPhone = () => {
           onChange={(e) => setColor(e.target.value)}
         />
         <button
-          className="bg-slate-700 text-white p-2 rounded-md w-3/12 animate-[fadeIn_1s_ease-in-out] 
+          className="bg-slate-500 text-white p-2 rounded-md w-3/12 animate-[fadeIn_1s_ease-in-out] 
           items-center flex-col flex transition duration-300 hover:bg-slate-800 focus:outline-none focus:ring focus:border-slate-800"
           type="submit"
           disabled={loading}
