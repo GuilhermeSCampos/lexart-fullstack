@@ -9,7 +9,15 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard step={"list"} />} />
+        <Route
+          path="/dashboard/register"
+          element={<Dashboard step={"register"} />}
+        />
+        <Route
+          path="/dashboard/edit/:id"
+          element={<Dashboard step={"edit"} />}
+        />
         <Route path="/register" element={<SignUp />} />
       </Routes>
     </AuthProvider>
