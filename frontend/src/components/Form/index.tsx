@@ -1,4 +1,5 @@
 import ReactLoading from "react-loading";
+import { useTranslation } from "react-i18next";
 
 type props = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -33,6 +34,7 @@ const Form = ({
   type,
   active,
 }: props) => {
+  const { t } = useTranslation();
   const onChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -48,7 +50,7 @@ const Form = ({
     >
       <input
         type="text"
-        placeholder="Type phone name"
+        placeholder={t("typePhoneName")}
         className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
         required
         value={name}
@@ -56,7 +58,7 @@ const Form = ({
       />
       <input
         type="text"
-        placeholder="Type phone brand"
+        placeholder={t("typePhoneBrand")}
         className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
         required
         value={brand}
@@ -64,7 +66,7 @@ const Form = ({
       />
       <input
         type="text"
-        placeholder="Type phone model"
+        placeholder={t("typePhoneModel")}
         className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
         required
         value={model}
@@ -72,7 +74,7 @@ const Form = ({
       />
       <input
         type="text"
-        placeholder="Type phone price"
+        placeholder={t("typePhonePrice")}
         className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
         required
         value={price}
@@ -80,7 +82,7 @@ const Form = ({
       />
       <input
         type="text"
-        placeholder="Type phone color"
+        placeholder={t("typePhoneColor")}
         className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
         required
         value={color}
@@ -106,9 +108,9 @@ const Form = ({
             className="animate-[fadeIn_1s_ease-in-out]"
           />
         ) : type === "register" ? (
-          "Register"
+          t("register")
         ) : (
-          "Edit"
+          t("edit")
         )}
       </button>
     </form>

@@ -6,21 +6,26 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Eye, EyeSlash } from "@phosphor-icons/react";
 import ReactLoading from "react-loading";
+import { useTranslation } from "react-i18next";
+import Header from "../../components/Header";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, languageChange } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWarning, setUsernameWarning] = useState(false);
   const [passwordWarning, setPasswordWarning] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const handleLogin = async () => {
     if (username.length < 3) {
       setUsernameWarning(true);
       return true;
+    } else {
+      setUsernameWarning(false);
     }
     if (password.length < 6) {
       setPasswordWarning(true);
@@ -43,97 +48,101 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-300 to-[#57606f] w-screen h-screen flex flex-col justify-center items-center ">
-      <div className="w-full max-w-[600px] h-[500px] space-y-8 border-4 bg-white px-16 py-8 rounded-lg login-container animate-[fadeIn_1s_ease-in-out]">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-black">Welcome!</h1>
-        </div>
-        <div className="w-10/12 mx-auto flex-col flex gap-8">
-          <div>
-            <h1 className="text-2xl mb-2">Username</h1>
-            <input
-              placeholder="Type your username here"
-              className="border-4 w-full h-12 rounded-md px-2"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            {usernameWarning && (
-              <span className="text-sm ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
-                Username must have 3 or more characters.
-              </span>
-            )}
+    <div className={`${languageChange ? "fade-out" : "fade-in"}`}>
+      <Header />
+      <div className="bg-gradient-to-br from-gray-300 to-[#57606f] w-screen h-screen flex flex-col justify-center items-center ">
+        <div className="w-full max-w-[600px] h-[500px] space-y-8 border-4 bg-white px-16 py-8 rounded-lg login-container animate-[fadeIn_1s_ease-in-out]">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-black">{t("welcome")}</h1>
           </div>
-          <div>
-            <h1 className="text-2xl mb-2">Password</h1>
-            <div className="flex flex-col">
+          <div className="w-10/12 mx-auto flex-col flex gap-8">
+            <div>
+              <h1 className="text-2xl mb-2">{t("username")}</h1>
               <input
-                id="password"
-                placeholder="Type  your password here"
-                type={showPassword ? "text" : "password"}
-                className="border-4 w-full h-12 rounded-md px-2 pr-16"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder={t("usernamePlaceholder")}
+                className="border-4 w-full h-12 rounded-md px-2"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
-              {!showPassword ? (
-                <Eye
-                  size={24}
-                  className="flex self-end absolute mt-3 mr-3 cursor-pointer z-10"
-                  onClick={() => setShowPassword(true)}
-                />
-              ) : (
-                <EyeSlash
-                  size={24}
-                  className="flex self-end absolute mt-3 mr-3 cursor-pointer z-10"
-                  onClick={() => setShowPassword(false)}
-                />
+              {usernameWarning && (
+                <span className="text-sm ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
+                  {t("usernameWarning")}
+                </span>
               )}
             </div>
-            {passwordWarning && (
-              <span className="text-sm ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
-                Password must have 6 or more characters.
-              </span>
-            )}
+            <div>
+              <h1 className="text-2xl mb-2">{t("password")}</h1>
+              <div className="flex flex-col">
+                <input
+                  id="password"
+                  placeholder={t("passwordPlaceholder")}
+                  type={showPassword ? "text" : "password"}
+                  className="border-4 w-full h-12 rounded-md px-2 pr-16"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {!showPassword ? (
+                  <Eye
+                    size={24}
+                    className="flex self-end absolute mt-3 mr-3 cursor-pointer z-10"
+                    onClick={() => setShowPassword(true)}
+                  />
+                ) : (
+                  <EyeSlash
+                    size={24}
+                    className="flex self-end absolute mt-3 mr-3 cursor-pointer z-10"
+                    onClick={() => setShowPassword(false)}
+                  />
+                )}
+              </div>
+              {passwordWarning && (
+                <span className="text-sm ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
+                  {t("passwordWarning")}
+                </span>
+              )}
+            </div>
+            <button
+              onClick={() => handleLogin()}
+              className="w-5/12 bg-stone-500 text-white px-6 py-2 text-xl rounded-xl
+             mx-auto hover:bg-stone-600 transition duration-300 ease-in-out active:ring active:border-slate-800"
+              disabled={loading}
+            >
+              {loading ? (
+                <ReactLoading
+                  type="spin"
+                  width={"25%"}
+                  height={"25%"}
+                  className="mx-auto animate-[fadeIn_1s_ease-in-out]"
+                />
+              ) : (
+                t("login")
+              )}
+            </button>
           </div>
-          <button
-            onClick={() => handleLogin()}
-            className="w-5/12 bg-stone-500 text-white px-6 py-2 text-xl rounded-xl mx-auto hover:bg-stone-600 transition duration-300 ease-in-out active:ring active:border-slate-800"
-            disabled={loading}
-          >
-            {loading ? (
-              <ReactLoading
-                type="spin"
-                width={"25%"}
-                height={"25%"}
-                className="mx-auto animate-[fadeIn_1s_ease-in-out]"
-              />
-            ) : (
-              "Login"
-            )}
-          </button>
+          <div className="text-center text-lg text-black">
+            {t("dontHaveAccount")}{" "}
+            <span
+              className="underline cursor-pointer"
+              onClick={() => navigate("/register")}
+            >
+              {t("signup")}
+            </span>
+          </div>
         </div>
-        <div className="text-center text-lg text-black">
-          Don't have an account?{" "}
-          <span
-            className="underline cursor-pointer"
-            onClick={() => navigate("/register")}
-          >
-            Sign up
-          </span>
-        </div>
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        transition={Bounce}
-      />
     </div>
   );
 };

@@ -4,11 +4,13 @@ import { Phone } from "../../types/phone";
 import PhoneInfo from "./components/PhoneInfo";
 import ReactLoading from "react-loading";
 import "./style.css";
+import { useTranslation } from "react-i18next";
 
 const PhoneList = () => {
   const { fetchPhones } = useAuth();
   const [phones, setPhones] = useState<Phone[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const getPhones = async () => {
     setLoading(true);
@@ -29,24 +31,38 @@ const PhoneList = () => {
     </div>
   ) : (
     <div className="w-full animate-[fadeIn_1s_ease-in-out]">
-      <h1 className="text-4xl text-center">Listing</h1>
+      <h1 className="text-5xl text-center">{t("listing")}</h1>
 
       {phones.length === 0 ? (
         <h3 className="text-4xl flex flex-col items-center justify-center self-center h-[80%]">
-          There are no Registered Phones!
+          {t("noRegisteredProducts")}
         </h3>
       ) : (
         <div className="mt-8 max-h-[80%] overflow-y-auto w-11/12 mx-auto">
           <table className="border-collapse border border-gray-300 w-full mx-auto table-fixed">
             <thead>
               <tr className="bg-gray-200">
-                <th className="border border-gray-300 py-2 w-2/12">Name</th>
-                <th className="border border-gray-300 py-2 w-2/12">Brand</th>
-                <th className="border border-gray-300 py-2 w-2/12">Model</th>
-                <th className="border border-gray-300 py-2 w-2/12">Price</th>
-                <th className="border border-gray-300 py-2 w-2/12">Color</th>
-                <th className="border border-gray-300 py-2 w-1/12">Edit</th>
-                <th className="border border-gray-300 py-2 w-1/12">Remove</th>
+                <th className="border border-gray-300 py-2 w-2/12">
+                  {t("name")}
+                </th>
+                <th className="border border-gray-300 py-2 w-2/12">
+                  {t("brand")}
+                </th>
+                <th className="border border-gray-300 py-2 w-2/12">
+                  {t("model")}
+                </th>
+                <th className="border border-gray-300 py-2 w-2/12">
+                  {t("price")}
+                </th>
+                <th className="border border-gray-300 py-2 w-2/12">
+                  {t("color")}
+                </th>
+                <th className="border border-gray-300 py-2 w-1/12">
+                  {t("edit")}
+                </th>
+                <th className="border border-gray-300 py-2 w-1/12">
+                  {t("remove")}
+                </th>
               </tr>
             </thead>
             <tbody>

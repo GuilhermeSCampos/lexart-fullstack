@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { Phone } from "../../types/phone";
+import { useTranslation } from "react-i18next";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -21,6 +22,7 @@ const EditPhone = () => {
   const [loadingDetails, setLoadingDetails] = useState(true);
   const [invalidId, setInvalidId] = useState(false);
   const [active, setActive] = useState(false);
+  const { t } = useTranslation();
 
   const { id } = useParams();
 
@@ -38,9 +40,9 @@ const EditPhone = () => {
     });
 
     if (success) {
-      toast.success("Phone edited successfully!");
+      toast.success(t("succesEditProduct"));
     } else {
-      toast.error("Error editing phone!");
+      toast.error(t("errorEditProduct"));
     }
     setLoading(false);
   };
@@ -110,12 +112,12 @@ const EditPhone = () => {
 
   return (
     <div className="w-full flex flex-col gap-16 animate-[fadeIn_1s_ease-in-out]">
-      <h1 className="text-4xl text-center animate-[fadeIn_1s_ease-in-out]">
-        Editing
+      <h1 className="text-5xl text-center animate-[fadeIn_1s_ease-in-out]">
+        {t("edit")}
       </h1>
       {invalidId ? (
         <h1 className="text-4xl text-center animate-[fadeIn_1s_ease-in-out]">
-          There is no phone with this id
+          {t("noPhoneId")}
         </h1>
       ) : loadingDetails ? (
         <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center justify-center ">

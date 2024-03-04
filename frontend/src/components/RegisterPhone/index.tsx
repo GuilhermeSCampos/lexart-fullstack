@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AppContext";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Form from "../Form";
+import { useTranslation } from "react-i18next";
 
 const RegisterPhone = () => {
   const { registerPhone } = useAuth();
@@ -12,6 +13,7 @@ const RegisterPhone = () => {
   const [price, setPrice] = useState("");
   const [color, setColor] = useState("");
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,9 +26,9 @@ const RegisterPhone = () => {
       color
     );
     if (registered) {
-      toast.success("Phone registered successfully!");
+      toast.success(t("succesRegisterProduct"));
     } else {
-      toast.error("Error registering phone!");
+      toast.error(t("errorRegisterProduct"));
     }
     setName("");
     setBrand("");
@@ -38,8 +40,8 @@ const RegisterPhone = () => {
 
   return (
     <div className="w-full flex flex-col gap-16 animate-[fadeIn_1s_ease-in-out]">
-      <h1 className="text-4xl text-center animate-[fadeIn_1s_ease-in-out]">
-        Register
+      <h1 className="text-5xl text-center animate-[fadeIn_1s_ease-in-out]">
+        {t("register")}
       </h1>
       <Form
         handleSubmit={handleSubmit}

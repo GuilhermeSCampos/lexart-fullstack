@@ -19,6 +19,10 @@ interface AuthContextProps {
   ) => Promise<boolean>;
   removePhone: (id: number) => Promise<void>;
   editPhone: (phone: Phone) => Promise<boolean>;
+  languageChange: boolean;
+  setLanguageChange: (value: boolean) => void;
+  language: string;
+  setLanguage: (value: string) => void;
 }
 
 const AuthContext = createContext({} as AuthContextProps);
@@ -32,6 +36,8 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("" as string);
+  const [languageChange, setLanguageChange] = useState(false);
+  const [language, setLanguage] = useState("en");
 
   const navigate = useNavigate();
 
@@ -197,6 +203,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         registerPhone,
         removePhone,
         editPhone,
+        languageChange,
+        setLanguageChange,
+        language,
+        setLanguage,
       }}
     >
       {children}
