@@ -4,7 +4,6 @@ import Form from "../Form";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
-import { Phone } from "../../types/phone";
 import ReactLoading from "react-loading";
 
 const BASE_URL = import.meta.env.VITE_API_URL;

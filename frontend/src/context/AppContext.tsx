@@ -21,7 +21,6 @@ interface AuthContextProps {
   editPhone: (phone: Phone) => Promise<boolean>;
 }
 
-// Criar um contexto com um valor inicial vazio ({} as AuthContextProps)
 const AuthContext = createContext({} as AuthContextProps);
 
 interface AuthProviderProps {
@@ -30,7 +29,6 @@ interface AuthProviderProps {
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-// Provedor do contexto
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("" as string);
@@ -206,7 +204,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   );
 };
 
-// Hook personalizado para acessar o contexto
+// Hook
 export const useAuth = (): AuthContextProps => {
   const context = useContext(AuthContext);
   if (!context) {
