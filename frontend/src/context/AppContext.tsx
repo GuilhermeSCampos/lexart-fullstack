@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Phone } from "../types/phone";
 
-interface AuthContextProps {
+interface AppContextProps {
   isLoggedIn: boolean;
   login: (username: string, password: string) => Promise<boolean>;
   logout: () => void;
@@ -25,7 +25,7 @@ interface AuthContextProps {
   setLanguage: (value: string) => void;
 }
 
-const AuthContext = createContext({} as AuthContextProps);
+const AppContext = createContext({} as AppContextProps);
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -191,7 +191,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider
+    <AppContext.Provider
       value={{
         isLoggedIn,
         login,
@@ -210,13 +210,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AppContext.Provider>
   );
 };
 
 // Hook
-export const useAuth = (): AuthContextProps => {
-  const context = useContext(AuthContext);
+export const useAuth = (): AppContextProps => {
+  const context = useContext(AppContext);
   if (!context) {
     throw new Error("useAuth deve ser usado dentro de um AuthProvider");
   }

@@ -5,12 +5,19 @@ import PhoneInfo from "./components/PhoneInfo";
 import ReactLoading from "react-loading";
 import "./style.css";
 import { useTranslation } from "react-i18next";
+import { ArrowDown, ArrowUp, MagnifyingGlass } from "@phosphor-icons/react";
+
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const PhoneList = () => {
   const { fetchPhones } = useAuth();
   const [phones, setPhones] = useState<Phone[]>([]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
+  const [search, setSearch] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
   const getPhones = async () => {
     setLoading(true);
@@ -21,24 +28,79 @@ const PhoneList = () => {
     setLoading(false);
   };
 
+  const searchPhones = async () => {
+    const tokenString = localStorage.getItem("token");
+    const token = tokenString ? JSON.parse(tokenString) : "";
+
+    setLoading(true);
+    const response = await fetch(`${BASE_URL}/phones/search?query=${search}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    const data = await response.json();
+    setPhones(data);
+
+    setLoading(false);
+  };
+
+  const handleSearchChange = () => {
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+
+    const newTimeout = setTimeout(() => {
+      searchPhones();
+    }, 500);
+
+    setSearchTimeout(newTimeout);
+  };
+
   useEffect(() => {
     getPhones();
   }, []);
+
+  useEffect(() => {
+    if (search === "") {
+      getPhones();
+    } else {
+      handleSearchChange();
+    }
+  }, [search]);
 
   return loading ? (
     <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center justify-center ">
       <ReactLoading type="spin" color="#000" width={70} />
     </div>
   ) : (
-    <div className="w-full animate-[fadeIn_1s_ease-in-out]">
+    <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center gap-10">
       <h1 className="text-5xl text-center">{t("listing")}</h1>
+      <div className="w-3/12 flex flex-col items-center">
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md transition duration-300 focus:outline-none focus:border-blue-500 hover:border-blue-300 h-10 pr-14"
+        />
+        <MagnifyingGlass
+          size={24}
+          className="flex self-end a absolute mt-2 mr-3 cursor-pointer z-10"
+          onClick={() => searchPhones()}
+        />
+      </div>
 
       {phones.length === 0 ? (
         <h3 className="text-4xl flex flex-col items-center justify-center self-center h-[80%]">
           {t("noRegisteredProducts")}
         </h3>
       ) : (
-        <div className="mt-8 max-h-[80%] overflow-y-auto w-11/12 mx-auto">
+        <div className=" max-h-[80%] overflow-y-auto w-11/12 mx-auto">
           <table className="border-collapse border border-gray-300 w-full mx-auto table-fixed">
             <thead>
               <tr className="bg-gray-200">
@@ -53,6 +115,8 @@ const PhoneList = () => {
                 </th>
                 <th className="border border-gray-300 py-2 w-2/12">
                   {t("price")}
+                  <ArrowUp size={32} />
+                  <ArrowDown size={32} />
                 </th>
                 <th className="border border-gray-300 py-2 w-2/12">
                   {t("color")}
