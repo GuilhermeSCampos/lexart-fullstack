@@ -5,11 +5,13 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { Phone } from "../../types/phone";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const EditPhone = () => {
   const { editPhone } = useAuth();
+  const [phone, setPhone] = useState<Phone>();
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
@@ -18,6 +20,7 @@ const EditPhone = () => {
   const [loading, setLoading] = useState(false);
   const [loadingDetails, setLoadingDetails] = useState(true);
   const [invalidId, setInvalidId] = useState(false);
+  const [active, setActive] = useState(false);
 
   const { id } = useParams();
 
@@ -71,6 +74,7 @@ const EditPhone = () => {
           return;
         }
 
+        setPhone(data);
         setName(data.name);
         setBrand(data.brand);
         setModel(data.model);
@@ -84,6 +88,25 @@ const EditPhone = () => {
 
     fetchPhoneDetails();
   }, []);
+
+  useEffect(() => {
+    if (name !== phone?.name) {
+      return setActive(true);
+    }
+    if (brand !== phone?.brand) {
+      return setActive(true);
+    }
+    if (model !== phone?.model) {
+      return setActive(true);
+    }
+    if (price !== phone?.price.toString()) {
+      return setActive(true);
+    }
+    if (color !== phone?.color) {
+      return setActive(true);
+    }
+    return setActive(false);
+  }, [name, brand, model, price, color]);
 
   return (
     <div className="w-full flex flex-col gap-16 animate-[fadeIn_1s_ease-in-out]">
@@ -113,6 +136,7 @@ const EditPhone = () => {
           setModel={setModel}
           loading={loading}
           type="edit"
+          active={active}
         />
       )}
       <ToastContainer

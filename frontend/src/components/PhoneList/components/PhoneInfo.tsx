@@ -6,15 +6,18 @@ import { useNavigate } from "react-router-dom";
 type PhoneInfoProps = {
   phone: Phone;
   updatePhones: () => void;
+  setLoading: (value: boolean) => void;
 };
 
-const PhoneInfo = ({ phone, updatePhones }: PhoneInfoProps) => {
+const PhoneInfo = ({ phone, updatePhones, setLoading }: PhoneInfoProps) => {
   const { removePhone } = useAuth();
   const navigate = useNavigate();
 
   const handleRemove = async () => {
+    setLoading(true);
     await removePhone(phone.id);
-    updatePhones();
+    await updatePhones();
+    setLoading(false);
   };
 
   return (
@@ -39,10 +42,16 @@ const PhoneInfo = ({ phone, updatePhones }: PhoneInfoProps) => {
           size={20}
           className="mx-auto cursor-pointer"
           onClick={() => navigate(`/dashboard/edit/${phone.id}`)}
+          color="#e47200"
         />
       </td>
       <td className="border border-gray-300 py-2 px-4 cursor-pointer">
-        <Trash size={20} className="mx-auto" onClick={() => handleRemove()} />
+        <Trash
+          size={20}
+          color="red"
+          className="mx-auto"
+          onClick={() => handleRemove()}
+        />
       </td>
     </tr>
   );

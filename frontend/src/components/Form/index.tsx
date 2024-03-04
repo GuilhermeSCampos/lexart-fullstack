@@ -14,6 +14,7 @@ type props = {
   color: string;
   setColor: (color: string) => void;
   type: string;
+  active?: boolean;
 };
 
 const Form = ({
@@ -30,6 +31,7 @@ const Form = ({
   color,
   setColor,
   type,
+  active,
 }: props) => {
   const onChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -85,10 +87,16 @@ const Form = ({
         onChange={(e) => setColor(e.target.value)}
       />
       <button
-        className="bg-slate-500 text-white p-2 rounded-md w-3/12 animate-[fadeIn_1s_ease-in-out] 
-          items-center flex-col flex transition duration-300 hover:bg-slate-800 focus:outline-none focus:ring focus:border-slate-800"
+        className={`bg-slate-500 ${
+          type === "edit" && !active ? "bg-slate-400" : "bg-slate-500"
+        } text-white p-2 rounded-md w-3/12 animate-[fadeIn_1s_ease-in-out] 
+        items-center flex-col flex transition duration-300 ${
+          type === "edit" && !active
+            ? "hover:bg-slate-600"
+            : "hover:bg-slate-800"
+        } focus:outline-none focus:ring focus:border-slate-800 `}
         type="submit"
-        disabled={loading}
+        disabled={loading ? true : type === "edit" && !active ? true : false}
       >
         {loading ? (
           <ReactLoading

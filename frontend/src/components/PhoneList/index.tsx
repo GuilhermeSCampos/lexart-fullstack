@@ -55,6 +55,7 @@ const PhoneList = () => {
                   key={phone.id}
                   phone={phone}
                   updatePhones={getPhones}
+                  setLoading={setLoading}
                 />
               ))}
             </tbody>
