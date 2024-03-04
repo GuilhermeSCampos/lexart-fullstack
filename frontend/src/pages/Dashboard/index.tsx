@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "../../context/AppContext";
 import Sidebar from "../../components/Sidebar";
 import PhoneList from "../../components/PhoneList";
-import { Route, Routes } from "react-router-dom";
 import RegisterPhone from "../../components/RegisterPhone";
 
 type props = {

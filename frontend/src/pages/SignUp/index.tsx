@@ -98,6 +98,7 @@ const SignUp = () => {
           <button
             onClick={() => handleRegister()}
             className="w-5/12 bg-stone-600 text-white px-6 py-2 text-xl rounded-xl mx-auto"
+            disabled={loading}
           >
             {loading ? (
               <ReactLoading

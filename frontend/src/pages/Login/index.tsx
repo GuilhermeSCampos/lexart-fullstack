@@ -96,7 +96,8 @@ const Login = () => {
           </div>
           <button
             onClick={() => handleLogin()}
-            className="w-5/12 bg-stone-600 text-white px-6 py-2 text-xl rounded-xl mx-auto"
+            className="w-5/12 bg-stone-600 text-white px-6 py-2 text-xl rounded-xl mx-auto hover"
+            disabled={loading}
           >
             {loading ? (
               <ReactLoading
