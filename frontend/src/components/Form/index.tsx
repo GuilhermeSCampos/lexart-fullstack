@@ -1,5 +1,6 @@
 import ReactLoading from "react-loading";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 type props = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -44,76 +45,86 @@ const Form = ({
   };
 
   return (
-    <form
-      className="w-4/12 mx-auto h-auto flex flex-col items-center gap-8 bg-slate-300 rounded-xl py-8"
-      onSubmit={(e) => handleSubmit(e)}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 1,
+        delay: 0.2,
+        ease: [0, 0.71, 0.2, 1.01],
+      }}
     >
-      <input
-        type="text"
-        placeholder={t("typePhoneName")}
-        className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-        required
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder={t("typePhoneBrand")}
-        className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-        required
-        value={brand}
-        onChange={(e) => setBrand(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder={t("typePhoneModel")}
-        className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-        required
-        value={model}
-        onChange={(e) => setModel(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder={t("typePhonePrice")}
-        className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-        required
-        value={price}
-        onChange={(e) => onChangePrice(e)}
-      />
-      <input
-        type="text"
-        placeholder={t("typePhoneColor")}
-        className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-        required
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
-      />
-      <button
-        className={`bg-slate-500 ${
-          type === "edit" && !active ? "bg-slate-400" : "bg-slate-500"
-        } text-white p-2 rounded-md w-3/12 animate-[fadeIn_1s_ease-in-out] 
+      <form
+        className="w-4/12 mx-auto h-auto flex flex-col items-center gap-8 bg-slate-300 rounded-xl py-8"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <input
+          type="text"
+          placeholder={t("typePhoneName")}
+          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder={t("typePhoneBrand")}
+          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+          required
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder={t("typePhoneModel")}
+          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+          required
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder={t("typePhonePrice")}
+          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+          required
+          value={price}
+          onChange={(e) => onChangePrice(e)}
+        />
+        <input
+          type="text"
+          placeholder={t("typePhoneColor")}
+          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+          required
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+        />
+        <button
+          className={`bg-slate-500 ${
+            type === "edit" && !active ? "bg-slate-400" : "bg-slate-500"
+          } text-white p-2 rounded-md w-3/12 animate-[fadeIn_1s_ease-in-out] 
         items-center flex-col flex transition duration-300 ${
           type === "edit" && !active
             ? "hover:bg-slate-600"
             : "hover:bg-slate-800"
         } focus:outline-none focus:ring focus:border-slate-800 `}
-        type="submit"
-        disabled={loading ? true : type === "edit" && !active ? true : false}
-      >
-        {loading ? (
-          <ReactLoading
-            type="spin"
-            width={"21%"}
-            height={"21%"}
-            className="animate-[fadeIn_1s_ease-in-out]"
-          />
-        ) : type === "register" ? (
-          t("register")
-        ) : (
-          t("edit")
-        )}
-      </button>
-    </form>
+          type="submit"
+          disabled={loading ? true : type === "edit" && !active ? true : false}
+        >
+          {loading ? (
+            <ReactLoading
+              type="spin"
+              width={"21%"}
+              height={"21%"}
+              className="animate-[fadeIn_1s_ease-in-out]"
+            />
+          ) : type === "register" ? (
+            t("register")
+          ) : (
+            t("edit")
+          )}
+        </button>
+      </form>
+    </motion.div>
   );
 };
 

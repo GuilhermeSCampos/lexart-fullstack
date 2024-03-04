@@ -41,4 +41,10 @@ module.exports = {
 
     return res.status(200).json(phone);
   },
+  getByQuery: async (req, res) => {
+    const { query } = req.query;
+
+    const phones = await PhoneService.getByQuery(query);
+    return res.status(200).json(phones);
+  },
 };

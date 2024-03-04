@@ -1,4 +1,5 @@
 const Phone = require("../database/models/Phone");
+const { Op } = require("sequelize");
 
 module.exports = {
   createSingleProduct: async (data) => {
@@ -71,5 +72,19 @@ module.exports = {
     const phone = await Phone.findByPk(id);
 
     return phone;
+  },
+  getByQuery: async (query) => {
+    const phones = await Phone.findAll({
+      where: {
+        [Op.or]: [
+          { name: { [Op.iLike]: `%${query}%` } },
+          { brand: { [Op.iLike]: `%${query}%` } },
+          { model: { [Op.iLike]: `%${query}%` } },
+          { color: { [Op.iLike]: `%${query}%` } },
+        ],
+      },
+    });
+
+    return phones;
   },
 };

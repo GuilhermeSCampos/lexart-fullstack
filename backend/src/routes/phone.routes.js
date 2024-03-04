@@ -16,6 +16,8 @@ phoneRouter.post("/", [
   rescue(PhoneController.create),
 ]);
 
+phoneRouter.get("/search", rescue(PhoneController.getByQuery));
+
 phoneRouter.get("/:id", rescue(PhoneController.getById));
 
 phoneRouter.get("/", rescue(PhoneController.getAll));
