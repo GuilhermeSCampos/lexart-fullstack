@@ -67,4 +67,9 @@ module.exports = {
 
     return phone;
   },
+  getById: async (id) => {
+    const phone = await Phone.findByPk(id);
+
+    return phone;
+  },
 };

@@ -16,9 +16,14 @@ phoneRouter.post("/", [
   rescue(PhoneController.create),
 ]);
 
+phoneRouter.get("/:id", rescue(PhoneController.getById));
+
 phoneRouter.get("/", rescue(PhoneController.getAll));
 
-phoneRouter.put("/:id", [rescue(PhoneController.editPhone)]);
+phoneRouter.put("/:id", [
+  rescue(PhoneMiddlewares.verifyProductSchema),
+  rescue(PhoneController.editPhone),
+]);
 
 phoneRouter.delete("/:id", rescue(PhoneController.deletePhone));
 

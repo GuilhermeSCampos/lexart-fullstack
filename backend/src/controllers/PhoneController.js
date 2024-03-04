@@ -36,4 +36,9 @@ module.exports = {
 
     return res.status(200).json(phone);
   },
+  getById: async (req, res) => {
+    const phone = await PhoneService.getById(req.params.id);
+
+    return res.status(200).json(phone);
+  },
 };

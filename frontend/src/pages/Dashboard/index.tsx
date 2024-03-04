@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AppContext";
 import Sidebar from "../../components/Sidebar";
 import PhoneList from "../../components/PhoneList";
 import RegisterPhone from "../../components/RegisterPhone";
 import EditPhone from "../../components/EditPhone";
+import { Phone } from "../../types/phone";
 
 type props = {
   step: string;
