@@ -48,8 +48,8 @@ module.exports = {
 
     return phones;
   },
-  editPhone: async (data) => {
-    const { name, brand, price, color, model, id } = data;
+  editPhone: async (data, id) => {
+    const { name, brand, price, color, model } = data;
 
     const phone = await Phone.update(
       { name, brand, price, color, model },

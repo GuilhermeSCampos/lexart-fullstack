@@ -27,7 +27,7 @@ module.exports = {
     return res.status(200).json(phones);
   },
   editPhone: async (req, res) => {
-    const phone = await PhoneService.editPhone(req.body);
+    const phone = await PhoneService.editPhone(req.body, req.params.id);
 
     return res.status(200).json(phone);
   },

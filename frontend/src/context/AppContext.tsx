@@ -70,7 +70,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (!response.ok) {
       return false;
     }
-    return true;
+
+    return login(username, password);
   };
 
   const fetchPhones = async () => {
@@ -156,6 +157,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+    });
+  };
+
+  const editPhone = async (phone: Phone) => {
+    const tokenString = localStorage.getItem("token");
+    const token = tokenString ? JSON.parse(tokenString) : "";
+
+    await fetch(`${BASE_URL}/phones/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(phone),
     });
   };
 

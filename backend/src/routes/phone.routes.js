@@ -18,7 +18,7 @@ phoneRouter.post("/", [
 
 phoneRouter.get("/", rescue(PhoneController.getAll));
 
-phoneRouter.put("/", [rescue(PhoneController.editPhone)]);
+phoneRouter.put("/:id", [rescue(PhoneController.editPhone)]);
 
 phoneRouter.delete("/:id", rescue(PhoneController.deletePhone));
 

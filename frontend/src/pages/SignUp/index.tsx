@@ -32,7 +32,7 @@ const SignUp = () => {
       setLoading(true);
       const auth = await register(username, password);
       if (auth) {
-        navigate("/login");
+        navigate("/dashboard");
       } else {
         toast.error("Username Already exists!");
       }
@@ -97,7 +97,7 @@ const SignUp = () => {
           </div>
           <button
             onClick={() => handleRegister()}
-            className="w-5/12 bg-stone-600 text-white px-6 py-2 text-xl rounded-xl mx-auto"
+            className="w-5/12 bg-stone-500 text-white px-6 py-2 text-xl rounded-xl mx-auto hover:bg-stone-600 transition duration-300 ease-in-out active:ring active:border-slate-800"
             disabled={loading}
           >
             {loading ? (

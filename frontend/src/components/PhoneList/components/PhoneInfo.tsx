@@ -1,6 +1,7 @@
 import { Pencil, Trash } from "@phosphor-icons/react";
 import { Phone } from "../../../types/phone";
 import { useAuth } from "../../../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 type PhoneInfoProps = {
   phone: Phone;
@@ -9,6 +10,7 @@ type PhoneInfoProps = {
 
 const PhoneInfo = ({ phone, updatePhones }: PhoneInfoProps) => {
   const { removePhone } = useAuth();
+  const navigate = useNavigate();
 
   const handleRemove = async () => {
     await removePhone(phone.id);
@@ -33,7 +35,11 @@ const PhoneInfo = ({ phone, updatePhones }: PhoneInfoProps) => {
         {phone.color}
       </td>
       <td className="border border-gray-300 py-2 px-4">
-        <Pencil size={20} className="mx-auto cursor-pointer" />
+        <Pencil
+          size={20}
+          className="mx-auto cursor-pointer"
+          onClick={() => navigate(`/dashboard/edit/${phone.id}`)}
+        />
       </td>
       <td className="border border-gray-300 py-2 px-4 cursor-pointer">
         <Trash size={20} className="mx-auto" onClick={() => handleRemove()} />
