@@ -108,7 +108,7 @@ const PhoneList = () => {
   }, [filtering]);
 
   return (
-    <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center gap-10">
+    <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center gap-10 h-full">
       <h1 className="lg:text-5xl text-3xl text-center">{t("listing")}</h1>
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
@@ -147,7 +147,7 @@ const PhoneList = () => {
             delay: 0.2,
             ease: [0, 0.71, 0.2, 1.01],
           }}
-          className=" lg:max-h-[80%] max-h-[50%] overflow-y-auto w-11/12 mx-auto rounded-xl border-4 border-stone-300"
+          className="lg:max-h-[80%] max-h-[80%] border-3 overflow-y-auto w-11/12 mx-auto rounded-xl border-4 border-stone-300"
         >
           <table className="border-collapse border border-gray-300 w-full mx-auto lg:table-fixed">
             <thead>

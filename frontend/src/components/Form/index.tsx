@@ -55,7 +55,7 @@ const Form = ({
       }}
     >
       <form
-        className="lg:w-4/12 mx-auto h-auto flex flex-col items-center gap-8 bg-slate-300 rounded-xl py-8"
+        className="lg:w-4/12 mx-auto h-full flex flex-col items-center lg:gap-8 gap-4 bg-slate-300 rounded-xl py-8"
         onSubmit={(e) => handleSubmit(e)}
       >
         <input

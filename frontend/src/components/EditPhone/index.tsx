@@ -112,8 +112,8 @@ const EditPhone = () => {
   }, [name, brand, model, price, color]);
 
   return (
-    <div className="w-full flex flex-col gap-16 animate-[fadeIn_1s_ease-in-out]">
-      <h1 className="text-5xl text-center animate-[fadeIn_1s_ease-in-out]">
+    <div className="w-full flex flex-col lg:gap-16 gap-8 animate-[fadeIn_1s_ease-in-out]">
+      <h1 className="lg:text-5xl text-2xl text-center animate-[fadeIn_1s_ease-in-out]">
         {t("edit")}
       </h1>
       {invalidId ? (

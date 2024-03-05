@@ -36,7 +36,7 @@ const MenuBurguer = ({ step }: props) => {
             navigate("/dashboard");
           }}
         >
-          <List size={18} />
+          <List size={24} />
           <h2 className="text-base px-2 py-1">{t("listing")}</h2>
         </div>
         <div
@@ -50,7 +50,7 @@ const MenuBurguer = ({ step }: props) => {
             navigate("/dashboard/register");
           }}
         >
-          <DeviceMobile size={18} />
+          <DeviceMobile size={24} />
           <h2 className="text-base px-2">{t("registerPhone")}</h2>
         </div>
       </div>
