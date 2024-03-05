@@ -34,6 +34,7 @@
     "errorRegisterProduct": "Error registering product!",
     "succesEditProduct": "Product edited successfully!",
     "errorEditProduct": "Error editing product!",
-    "noPhoneId": "There is no product with this id"
+    "noPhoneId": "There is no product with this id",
+    "productsNotFound": "No Products found"
   }
 }

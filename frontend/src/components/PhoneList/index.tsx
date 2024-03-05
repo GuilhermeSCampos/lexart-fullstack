@@ -11,6 +11,7 @@ import {
   MagnifyingGlass,
   Minus,
 } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -54,7 +55,8 @@ const PhoneList = () => {
 
     const data = await response.json();
 
-    setPhones(data);
+    const sorted = data.sort((a: Phone, b: Phone) => a.id - b.id);
+    setPhones(sorted);
 
     setLoading(false);
   };
@@ -97,29 +99,26 @@ const PhoneList = () => {
   };
 
   useEffect(() => {
-    getPhones();
-  }, []);
-
-  useEffect(() => {
-    if (search === "") {
-      getPhones();
-    } else {
-      handleSearchChange();
-    }
+    handleSearchChange();
   }, [search]);
 
   useEffect(() => {
     filterPhonesByPrice();
   }, [filtering]);
 
-  return loading ? (
-    <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center justify-center ">
-      <ReactLoading type="spin" color="#000" width={70} />
-    </div>
-  ) : (
+  return (
     <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center gap-10">
       <h1 className="text-5xl text-center">{t("listing")}</h1>
-      <div className="w-3/12 flex flex-col items-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1.3,
+          delay: 0.5,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+        className="w-3/12 flex flex-col items-center"
+      >
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -127,17 +126,28 @@ const PhoneList = () => {
         />
         <MagnifyingGlass
           size={24}
-          className="flex self-end a absolute mt-2 mr-3 cursor-pointer z-10"
-          onClick={() => searchPhones()}
+          className="flex self-end a absolute mt-2 mr-3 z-10"
         />
-      </div>
-
-      {phones.length === 0 ? (
-        <h3 className="text-4xl flex flex-col items-center justify-center self-center h-[80%]">
-          {t("noRegisteredProducts")}
+      </motion.div>
+      {loading ? (
+        <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center justify-center mt-10">
+          <ReactLoading type="spin" color="#000" width={70} />
+        </div>
+      ) : phones.length === 0 ? (
+        <h3 className="text-4xl flex flex-col items-center justify-center self-center h-[40%]">
+          {t("productsNotFound")}
         </h3>
       ) : (
-        <div className=" max-h-[80%] overflow-y-auto w-11/12 mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1,
+            delay: 0.2,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+          className=" max-h-[80%] overflow-y-auto w-11/12 mx-auto rounded-xl border-4"
+        >
           <table className="border-collapse border border-gray-300 w-full mx-auto table-fixed">
             <thead>
               <tr className="bg-gray-200">
@@ -205,7 +215,7 @@ const PhoneList = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </motion.div>
       )}
     </div>
   );
