@@ -55,7 +55,7 @@ const Form = ({
       }}
     >
       <form
-        className="w-4/12 mx-auto h-auto flex flex-col items-center gap-8 bg-slate-300 rounded-xl py-8"
+        className="lg:w-4/12 mx-auto h-auto flex flex-col items-center gap-8 bg-slate-300 rounded-xl py-8"
         onSubmit={(e) => handleSubmit(e)}
       >
         <input
@@ -113,7 +113,7 @@ const Form = ({
           {loading ? (
             <ReactLoading
               type="spin"
-              width={"21%"}
+              width={window.innerWidth <= 1024 ? "31%" : "21%"}
               height={"21%"}
               className="animate-[fadeIn_1s_ease-in-out]"
             />

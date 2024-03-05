@@ -108,7 +108,7 @@ const PhoneList = () => {
 
   return (
     <div className="w-full animate-[fadeIn_1s_ease-in-out] flex flex-col items-center gap-10">
-      <h1 className="text-5xl text-center">{t("listing")}</h1>
+      <h1 className="lg:text-5xl text-3xl text-center">{t("listing")}</h1>
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -117,12 +117,12 @@ const PhoneList = () => {
           delay: 0.5,
           ease: [0, 0.71, 0.2, 1.01],
         }}
-        className="w-3/12 flex flex-col items-center"
+        className="lg:w-3/12 flex flex-col items-center"
       >
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md transition duration-300 focus:outline-none focus:border-blue-500 hover:border-blue-300 h-10 pr-14"
+          className="w-full p-2 border-2 border-gray-500 rounded-md transition duration-300 focus:outline-none focus:border-blue-500 hover:border-blue-300 h-10 pr-14"
         />
         <MagnifyingGlass
           size={24}
@@ -134,7 +134,7 @@ const PhoneList = () => {
           <ReactLoading type="spin" color="#000" width={70} />
         </div>
       ) : phones.length === 0 ? (
-        <h3 className="text-4xl flex flex-col items-center justify-center self-center h-[40%]">
+        <h3 className="lg:text-4xl text-xl mt-10 lg:mt-10 flex flex-col items-center justify-center self-center h-[40%]">
           {t("productsNotFound")}
         </h3>
       ) : (
@@ -146,9 +146,9 @@ const PhoneList = () => {
             delay: 0.2,
             ease: [0, 0.71, 0.2, 1.01],
           }}
-          className=" max-h-[80%] overflow-y-auto w-11/12 mx-auto rounded-xl border-4"
+          className=" lg:max-h-[80%] max-h-[50%] overflow-y-auto w-11/12 mx-auto rounded-xl border-4 border-stone-300"
         >
-          <table className="border-collapse border border-gray-300 w-full mx-auto table-fixed">
+          <table className="border-collapse border border-gray-300 w-full mx-auto lg:table-fixed">
             <thead>
               <tr className="bg-gray-200">
                 <th className="border border-gray-300 py-2 w-2/12">

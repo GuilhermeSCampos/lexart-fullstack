@@ -21,9 +21,9 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full flex gap-4 justify-end my-5 absolute">
+    <div className="w-full flex gap-4 lg:justify-end justify-around lg:px-5 lg:my-5 my-2 absolute">
       <img
-        className={`w-[40px] cursor-pointer rounded ${
+        className={`lg:w-[40px] w-[50px] cursor-pointer rounded ${
           language === "pt"
             ? "border-2 border-green-200"
             : "grayscale hover:grayscale-[60%] transition duration-700 ease-in-out"
@@ -32,7 +32,7 @@ const Header = () => {
         onClick={() => handleLanguageChange("pt")}
       />
       <img
-        className={`w-[40px] cursor-pointer rounded ${
+        className={`lg:w-[40px] w-[50px] cursor-pointer rounded ${
           language === "en"
             ? "border-2 border-red-200"
             : "grayscale hover:grayscale-[20%] transition duration-400 ease-in-out"
@@ -40,7 +40,6 @@ const Header = () => {
         src={usaIcon}
         onClick={() => handleLanguageChange("en")}
       />
-      <div></div>
     </div>
   );
 };

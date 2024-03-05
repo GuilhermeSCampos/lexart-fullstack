@@ -37,7 +37,7 @@ const PhoneInfo = ({ phone, updatePhones, setLoading }: PhoneInfoProps) => {
       <td className="border border-gray-300 py-2 px-4 break-words">
         {phone.color}
       </td>
-      <td className="border border-gray-300 py-2 px-4">
+      <td className="border border-gray-300 py-2 lg:px-4 px-8">
         <Pencil
           size={20}
           className="mx-auto cursor-pointer"
@@ -45,7 +45,7 @@ const PhoneInfo = ({ phone, updatePhones, setLoading }: PhoneInfoProps) => {
           color="#e47200"
         />
       </td>
-      <td className="border border-gray-300 py-2 px-4 cursor-pointer">
+      <td className="border border-gray-300 py-2 lg:px-4 px-8 cursor-pointer">
         <Trash
           size={20}
           color="red"

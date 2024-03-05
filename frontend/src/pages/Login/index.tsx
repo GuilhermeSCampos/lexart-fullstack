@@ -67,16 +67,16 @@ const Login = () => {
             },
           }}
         >
-          <div className="w-full max-w-[600px] h-[500px] space-y-8 border-4 bg-white px-16 py-8 rounded-lg login-container animate-[fadeIn_1s_ease-in-out]">
+          <div className="lg:w-full w-10/12 lg:mx-0 mx-auto lg:max-w-[600px] h-[500px] space-y-8 border-4 bg-white lg:px-16 px-6 py-8 rounded-lg login-container animate-[fadeIn_1s_ease-in-out]">
             <div className="text-center">
               <h1 className="text-3xl font-bold text-black">{t("welcome")}</h1>
             </div>
-            <div className="w-10/12 mx-auto flex-col flex gap-8">
+            <div className="lg:w-10/12  mx-auto flex-col flex gap-8">
               <div>
                 <h1 className="text-2xl mb-2">{t("username")}</h1>
                 <input
                   placeholder={t("usernamePlaceholder")}
-                  className="border-4 w-full h-12 rounded-md px-2"
+                  className="border-4 border-stone-300 w-full h-12 rounded-md px-2 pr-16"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -93,7 +93,7 @@ const Login = () => {
                     id="password"
                     placeholder={t("passwordPlaceholder")}
                     type={showPassword ? "text" : "password"}
-                    className="border-4 w-full h-12 rounded-md px-2 pr-16"
+                    className="border-4 border-stone-300 w-full h-12 rounded-md px-2 pr-16"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -126,7 +126,7 @@ const Login = () => {
                 {loading ? (
                   <ReactLoading
                     type="spin"
-                    width={"25%"}
+                    width={window.innerWidth < 1024 ? "40%" : "25%"}
                     height={"25%"}
                     className="mx-auto animate-[fadeIn_1s_ease-in-out]"
                   />
