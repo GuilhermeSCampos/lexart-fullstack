@@ -1,7 +1,7 @@
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AppContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Eye, EyeSlash } from "@phosphor-icons/react";
@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { register, languageChange } = useAuth();
+  const { register, languageChange, validateToken } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWarning, setUsernameWarning] = useState(false);
@@ -45,6 +45,19 @@ const SignUp = () => {
     setUsername("");
     setPassword("");
   };
+
+  useEffect(() => {
+    const validatePreviousLogin = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const success = await validateToken();
+        if (success) {
+          navigate("/dashboard");
+        }
+      }
+    };
+    validatePreviousLogin();
+  }, []);
 
   return (
     <div className={`${languageChange ? "fade-out" : "fade-in"}`}>

@@ -9,7 +9,7 @@ interface AppContextProps {
   register: (username: string, password: string) => Promise<boolean>;
   fetchPhones: () => Promise<Phone[]>;
   username: string;
-  validateToken: () => void;
+  validateToken: () => Promise<boolean>;
   registerPhone: (
     name: string,
     brand: string,
@@ -121,10 +121,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     if (!response.ok) {
       navigate("/login");
+      return false;
     }
 
     const data = await response.json();
     setUsername(data.data.username);
+    return true;
   };
 
   const registerPhone = async (
