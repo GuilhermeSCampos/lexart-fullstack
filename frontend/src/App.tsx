@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import SignUp from "./pages/SignUp";
+import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/AppContext";
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
           element={<Dashboard step={"edit"} />}
         />
         <Route path="/register" element={<SignUp />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );
