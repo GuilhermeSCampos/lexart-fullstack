@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import "../../index.css";
 import "./style.css";
 import MenuBurguer from "../../components/Menu";
+import ReactLoading from "react-loading";
 
 type props = {
   step: string;
@@ -15,6 +16,7 @@ type props = {
 
 const Dashboard = ({ step }: props) => {
   const { validateToken, languageChange } = useAuth();
+  const [validatingToken, setValidatingToken] = useState(true);
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -31,8 +33,14 @@ const Dashboard = ({ step }: props) => {
     };
   }, []);
 
+  const validateUserToken = async () => {
+    console.log("teste");
+    await validateToken();
+    setValidatingToken(false);
+  };
+
   useEffect(() => {
-    validateToken();
+    validateUserToken();
   }, []);
 
   return (
@@ -46,13 +54,19 @@ const Dashboard = ({ step }: props) => {
 
       <div className="bg-[#666666]/50 w-screen h-screen flex flex-col justify-center items-center">
         <div className="max-w-screen-xg w-11/12 lg:h-[800px] h-[80%] mt-4 border-2 bg-white px-4 py-8 rounded-lg animate-[fadeIn_1s_ease-in-out] flex lg:flex-row flex-col">
-          <Sidebar step={step} />
-          {step === "list" ? (
-            <PhoneList />
-          ) : step === "register" ? (
-            <RegisterPhone />
+          {validatingToken ? (
+            <ReactLoading type={"spin"} color={"#000"} className="mx-auto" />
           ) : (
-            step === "edit" && <EditPhone />
+            <>
+              <Sidebar step={step} />
+              {step === "list" ? (
+                <PhoneList />
+              ) : step === "register" ? (
+                <RegisterPhone />
+              ) : (
+                step === "edit" && <EditPhone />
+              )}
+            </>
           )}
         </div>
       </div>

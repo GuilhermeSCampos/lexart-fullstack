@@ -37,6 +37,8 @@
     "noPhoneId": "There is no product with this id",
     "productsNotFound": "No Products found",
     "usernameAlreadyExists": "Username Already exists!",
-    "userOrPasswordIncorrect": "Invalid username or password!"
+    "userOrPasswordIncorrect": "Invalid username or password!",
+    "notFound": "THE PAGE YOU WERE LOOKING FOR DOES NOT EXIST.",
+    "goBack": "Go back"
   }
 }

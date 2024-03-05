@@ -3,10 +3,12 @@ import Header from "../../components/Header";
 import { useAuth } from "../../context/AppContext";
 import { Warning } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const NotFound = () => {
   const { languageChange } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className={`${languageChange ? "fade-out" : "fade-in"}`}>
@@ -31,14 +33,12 @@ const NotFound = () => {
             <Warning size={100} color="red" />
             <div className="flex flex-col items-center w-10/12 gap-8 justify-center">
               <h1 className="text-6xl font-bold">404</h1>
-              <h2 className="text-2xl text-center">
-                THE PAGE YOU WERE LOOKING FOR DOES NOT EXIST
-              </h2>
+              <h2 className="text-2xl text-center">{t("notFound")}</h2>
               <button
                 onClick={() => navigate("/")}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
               >
-                Go Back
+                {t("goBack")}
               </button>
             </div>
           </div>
