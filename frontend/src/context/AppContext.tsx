@@ -92,9 +92,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
 
     if (!response.ok) {
-      setLoggedIn(false);
-      localStorage.clear();
-      navigate("/login");
+      logout();
     }
 
     const data = await response.json();
@@ -120,7 +118,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
 
     if (!response.ok) {
-      navigate("/login");
+      logout();
       return false;
     }
 
@@ -136,6 +134,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     price: number,
     color: string
   ) => {
+    await validateToken();
     const tokenString = localStorage.getItem("token");
     const token = tokenString ? JSON.parse(tokenString) : "";
 
@@ -155,6 +154,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const removePhone = async (id: number) => {
+    await validateToken();
     const tokenString = localStorage.getItem("token");
     const token = tokenString ? JSON.parse(tokenString) : "";
 
@@ -168,6 +168,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const editPhone = async (phone: Phone) => {
+    await validateToken();
     const tokenString = localStorage.getItem("token");
     const token = tokenString ? JSON.parse(tokenString) : "";
 

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const EditPhone = () => {
-  const { editPhone } = useAuth();
+  const { editPhone, validateToken } = useAuth();
   const [phone, setPhone] = useState<Phone>();
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
@@ -51,6 +51,7 @@ const EditPhone = () => {
     const fetchPhoneDetails = async () => {
       setLoadingDetails(true);
       try {
+        await validateToken();
         const tokenString = localStorage.getItem("token");
         const token = tokenString ? JSON.parse(tokenString) : "";
 

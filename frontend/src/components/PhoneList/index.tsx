@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const PhoneList = () => {
-  const { fetchPhones } = useAuth();
+  const { fetchPhones, validateToken } = useAuth();
   const [phones, setPhones] = useState<Phone[]>([]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
@@ -37,6 +37,7 @@ const PhoneList = () => {
   };
 
   const searchPhones = async () => {
+    await validateToken();
     const tokenString = localStorage.getItem("token");
     const token = tokenString ? JSON.parse(tokenString) : "";
 
