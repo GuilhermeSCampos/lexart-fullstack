@@ -35,7 +35,7 @@ E também é possível verificar a API neste [<strong>deploy realizado no Vercel
 * Joi
 * Sequelize
 * PostgreSQL do Vercel
-
+* bcyptjs
 
   
 ## :hammer_and_wrench: Instalação e execução
@@ -140,11 +140,11 @@ VITE_API_URL="https://lexart-fullstack-backend.vercel.app"
 
 ### 📱Rotas para interação com os produtos:
 <summary markdown="span"><strong>Obtendo lista de todos os produtos - GET /phones</strong></summary><br />
-<summary markdown="span"><strong>Obtendo cliente por ID - GET /phones/:ID</strong></summary><br />
-<summary markdown="span"><strong>Obtendo lista de produtos filtradas por query - GET /phones/search?query="query desejada"</strong></summary><br />
-<summary markdown="span"><strong>Excluindo um Produto - DELETE /phones/:ID</strong></summary><br />
+<summary markdown="span"><strong>Obtendo cliente por ID - GET /phones/:id</strong></summary><br />
+<summary markdown="span"><strong>Obtendo lista de produtos filtradas por query - GET /phones/search?query=query desejada</strong></summary><br />
+<summary markdown="span"><strong>Excluindo um Produto - DELETE /phones/:id</strong></summary><br />
 <details>
-<summary markdown="span"><strong>Editando um produto - PUT /phones/:ID</strong></summary><br /> 
+<summary markdown="span"><strong>Editando um produto - PUT /phones/:id</strong></summary><br /> 
 
   ```sh
 body = {
