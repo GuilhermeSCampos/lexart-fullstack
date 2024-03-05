@@ -148,22 +148,6 @@ VITE_API_URL="https://lexart-fullstack-backend.vercel.app"
 
   ```sh
 body = {
-          "name": "Edson Caparroz",
-          "email": "edson-mac@hotmail.com",
-          "cpf": "22222222222",
-          "phone": "11982344005",
-           "status": "Ativo",
-        }
-```
-</details>
-
-
- 
-<details>
-  <summary markdown="span"><strong>Cadastrando um cliente - POST / </strong></summary><br />
-  
-```sh
-body = {
    name: "Xiaomi Redmi 9",
    brand: "Xiaomi",
    model: "Redmi 9",
@@ -172,6 +156,81 @@ body = {
 }
 ```
 </details>
+
+
+ 
+<details>
+  <summary markdown="span"><strong>Cadastrando um cliente - POST /phones </strong></summary><br />
+
+  <strong>Estrutura 1 </strong><br />
+  
+  
+```sh
+body = {
+  "name": "Xiaomi Redmi 9",
+  "brand": "Xiaomi",
+  "model": "Redmi 9",
+  "price": 10000,
+  "color": "red"
+}
+```
+
+  <strong>Estrutura 2 </strong><br />
+  
+  
+```sh
+body = {
+  "name": "Xiaomi Redmi 9",
+  "details": {
+    "brand": "Xiaomi",
+    "model": "Redmi 9",
+    "color": "red"
+  },
+  "price": 10000
+}
+```
+
+  <strong>Estrutura 3 </strong><br />
+  
+  
+```sh
+body = [
+  {
+    "name": "Xiaomi Redmi 9",
+    "brand": "Xiaomi",
+    "model": "Redmi 9",
+    "data": [
+      {
+        "price": 10000,
+        "color": "red"
+      },
+      {
+        "price": 10000,
+        "color": "blue"
+      }
+    ]
+  },
+  {
+    "name": "Iphone 14 Pro",
+    "brand": "Iphone",
+    "model": "14 Pro",
+    "data": [
+      {
+        "price": 30000,
+        "color": "silver"
+      },
+      {
+        "price": 30100,
+        "color": "gold"
+      }
+    ]
+  }
+]
+
+
+```
+</details>
+
 
 <details>
   <summary markdown="span"><strong>Editando um cliente por ID - PUT /ID </strong></summary><br />
