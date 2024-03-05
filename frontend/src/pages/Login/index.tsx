@@ -20,6 +20,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
+  const [active, setActive] = useState(false);
 
   const handleLogin = async () => {
     if (username.length < 3) {
@@ -61,6 +62,14 @@ const Login = () => {
     validatePreviousLogin();
   }, []);
 
+  useEffect(() => {
+    if (username.length > 2 && password.length > 5) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [username, password]);
+
   return (
     <div className={`${languageChange ? "fade-out" : "fade-in"}`}>
       <Header />
@@ -94,7 +103,7 @@ const Login = () => {
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 {usernameWarning && (
-                  <span className="text-sm ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
+                  <span className="lg:text-sm text-xs ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
                     {t("usernameWarning")}
                   </span>
                 )}
@@ -125,15 +134,19 @@ const Login = () => {
                   )}
                 </div>
                 {passwordWarning && (
-                  <span className="text-sm ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
+                  <span className="lg:text-sm text-xs ml-4 text-red-400 animate-[fadeIn_1s_ease-in-out]">
                     {t("passwordWarning")}
                   </span>
                 )}
               </div>
               <button
                 onClick={() => handleLogin()}
-                className="w-5/12 bg-stone-500 text-white px-6 py-2 text-xl rounded-xl
-             mx-auto hover:bg-stone-600 transition duration-300 ease-in-out active:ring active:border-slate-800"
+                className={`w-5/12 ${
+                  active
+                    ? "bg-cyan-600 hover:bg-cyan-700 active:border-cyan-800"
+                    : "bg-stone-500 hover:bg-stone-600 active:border-slate-800"
+                }  text-white px-6 py-2 text-xl rounded-xl
+                mx-auto  transition duration-300 ease-in-out active:ring transform active:scale-90`}
                 disabled={loading}
               >
                 {loading ? (
@@ -148,7 +161,7 @@ const Login = () => {
                 )}
               </button>
             </div>
-            <div className="text-center text-lg text-black">
+            <div className="text-center lg:text-lg text-sm text-lg text-black">
               {t("dontHaveAccount")}{" "}
               <span
                 className="underline cursor-pointer"
