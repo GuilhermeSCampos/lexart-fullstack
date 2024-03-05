@@ -32,7 +32,10 @@ const PhoneInfo = ({ phone, updatePhones, setLoading }: PhoneInfoProps) => {
         {phone.model}
       </td>
       <td className="border border-gray-300 py-2 px-4 break-words">
-        ${phone.price}
+        {Number(phone.price).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })}
       </td>
       <td className="border border-gray-300 py-2 px-4 break-words">
         {phone.color}

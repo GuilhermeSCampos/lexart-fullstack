@@ -35,6 +35,8 @@
     "succesEditProduct": "Produto editado com sucesso!",
     "errorEditProduct": "Erro ao editar produto!",
     "noPhoneId": "Nenhum produto com ID requisitado",
-    "productsNotFound": "Nenhum produto encontrado"
+    "productsNotFound": "Nenhum produto encontrado",
+    "usernameAlreadyExists": "Usuário já existe!",
+    "userOrPasswordIncorrect": "Usuário ou senha incorretos!"
   }
 }

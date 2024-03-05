@@ -40,7 +40,7 @@ const Login = () => {
       if (auth) {
         navigate("/dashboard");
       } else {
-        toast.error("Invalid username or password!");
+        toast.error(t("userOrPasswordIncorrect"));
       }
     }
     setLoading(false);

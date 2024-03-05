@@ -38,7 +38,7 @@ const SignUp = () => {
       if (auth) {
         navigate("/dashboard");
       } else {
-        toast.error("Username Already exists!");
+        toast.error(t("usernameAlreadyExists"));
       }
     }
     setLoading(false);
