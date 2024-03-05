@@ -1,5 +1,5 @@
 const Phone = require("../database/models/Phone");
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 
 module.exports = {
   createSingleProduct: async (data) => {
@@ -81,6 +81,13 @@ module.exports = {
           { brand: { [Op.iLike]: `%${query}%` } },
           { model: { [Op.iLike]: `%${query}%` } },
           { color: { [Op.iLike]: `%${query}%` } },
+          {
+            price: {
+              [Op.or]: [
+                Sequelize.literal(`CAST(price AS TEXT) ILIKE '%${query}%'`),
+              ],
+            },
+          },
         ],
       },
     });

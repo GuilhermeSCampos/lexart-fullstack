@@ -5,7 +5,12 @@ import PhoneInfo from "./components/PhoneInfo";
 import ReactLoading from "react-loading";
 import "./style.css";
 import { useTranslation } from "react-i18next";
-import { ArrowDown, ArrowUp, MagnifyingGlass } from "@phosphor-icons/react";
+import {
+  ArrowDown,
+  ArrowUp,
+  MagnifyingGlass,
+  Minus,
+} from "@phosphor-icons/react";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -19,12 +24,13 @@ const PhoneList = () => {
     null
   );
   const [filtering, setFiltering] = useState("");
-  console.log(filtering);
+
   const getPhones = async () => {
     setLoading(true);
 
     const data = await fetchPhones();
-    setPhones(data);
+    const sorted = data.sort((a: Phone, b: Phone) => a.id - b.id);
+    setPhones(sorted);
 
     setLoading(false);
   };
@@ -47,6 +53,7 @@ const PhoneList = () => {
     }
 
     const data = await response.json();
+
     setPhones(data);
 
     setLoading(false);
@@ -67,15 +74,24 @@ const PhoneList = () => {
   const filterPhonesByPrice = () => {
     if (filtering === "asc") {
       setPhones((prev) => [...prev.sort((a, b) => a.price - b.price)]);
-    } else if (filtering === "desc") {
+    }
+    if (filtering === "desc") {
       setPhones((prev) => [...prev.sort((a, b) => b.price - a.price)]);
+    }
+
+    if (filtering === "") {
+      setPhones((prev) => [...prev.sort((a, b) => a.id - b.id)]);
     }
   };
 
   const handleFilterOnText = () => {
-    if (filtering === "asc" || filtering === "") {
+    if (filtering === "asc") {
       setFiltering("desc");
-    } else if (filtering === "desc") {
+    }
+    if (filtering === "desc") {
+      setFiltering("");
+    }
+    if (filtering === "") {
       setFiltering("asc");
     }
   };
@@ -142,8 +158,15 @@ const PhoneList = () => {
                     >
                       {t("price")}
                     </p>
+                    {filtering === "" && (
+                      <Minus
+                        className="cursor-pointer mt-1"
+                        size={20}
+                        onClick={() => setFiltering("asc")}
+                      />
+                    )}
 
-                    {(filtering === "asc" || filtering === "") && (
+                    {filtering === "asc" && (
                       <ArrowUp
                         className="cursor-pointer"
                         size={20}
@@ -155,7 +178,7 @@ const PhoneList = () => {
                       <ArrowDown
                         className="cursor-pointer"
                         size={20}
-                        onClick={() => setFiltering("asc")}
+                        onClick={() => setFiltering("")}
                       />
                     )}
                   </div>
