@@ -32,7 +32,6 @@ E também é possível verificar a API neste [<strong>deploy realizado no Vercel
 <strong>Backend<strong/>
 * Node.js
 * Express.js
-* Cors
 * Joi
 * Sequelize
 * PostgreSQL do Vercel
@@ -139,6 +138,7 @@ VITE_API_URL="https://lexart-fullstack-backend.vercel.app"
  
  ## :computer: Documentação e rotas da API:
 
+### 📱Rotas para interação com os produtos:
 <summary markdown="span"><strong>Obtendo lista de todos os produtos - GET /phones</strong></summary><br />
 <summary markdown="span"><strong>Obtendo cliente por ID - GET /phones/:ID</strong></summary><br />
 <summary markdown="span"><strong>Obtendo lista de produtos filtradas por query - GET /phones/search?query="query desejada"</strong></summary><br />
@@ -160,7 +160,7 @@ body = {
 
  
 <details>
-  <summary markdown="span"><strong>Cadastrando um cliente - POST /phones </strong></summary><br />
+  <summary markdown="span"><strong>Registrando um produto - POST /phones </strong></summary><br />
 
   <strong>Estrutura 1 </strong><br />
   
@@ -231,42 +231,30 @@ body = [
 ```
 </details>
 
+#### * __*Todas as rotas referentes à interação com produtos necessitam de um token obtido ao fazer login na chave Authorization nos Headers da requisição*__ *
 
+### 🙆 Rotas para autenticação e usuários
 <details>
-  <summary markdown="span"><strong>Editando um cliente por ID - PUT /ID </strong></summary><br />
-  
-```sh
+<summary markdown="span"><strong>Registrando um usuário - POST /user/register</strong></summary><br />
+
+  ```sh
 body = {
-          "id": 53,
-          "name": "Edson Caparroz",
-          "email": "edson-mac@hotmail.com",
-          "cpf": "22222222222",
-          "phone": "11982344005",
-           "status": "Ativo",
-        }
+  "username": "testeuser",
+  "password": "testesenha"
+}
+```
+  </details>
+  <details>
+<summary markdown="span"><strong>Fazendo o Login - POST /auth/login</strong></summary><br />
+    
+  ```sh
+body = {
+  "username": "testeuser",
+  "password": "testesenha"
+}
 ```
 </details>
-
- ## :sunrise: Interações com Frontend :sunrise:
-<details>
-  <summary markdown="span"><strong>Ícone de alerta com Modal para alerta de input</strong></summary><br />
-  <img src="./assets/modalAlert.png" />
-</details>
-<details>
-  <summary markdown="span"><strong>Componente de Loading para aguardar requisições na API</strong></summary><br />
-  <img src="./assets/botaoloading.png" />
-</details>
-<details>
-  <summary markdown="span"><strong>Alertas de sucesso ou falha para requisições na API</strong></summary><br />
-  <img src="./assets/apiresultnotok.png" />
-  <img src="./assets/apiresultok.png" />
-</details>
-<details>
-  <summary markdown="span"><strong>Opção de DELETE com ícone de Lixeira + Confirmação de ação</strong></summary><br />
-  <img src="./assets/trashcan.png" />
-  <img src="./assets/confirmdelete.png" />
-</details>
-
+<summary markdown="span"><strong>Validando um token - POST /auth/validate --> com o token nos Headers da requisição</strong></summary><br />
 
  
  
