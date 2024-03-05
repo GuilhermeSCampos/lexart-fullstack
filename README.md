@@ -256,5 +256,9 @@ body = {
 </details>
 <summary markdown="span"><strong>Validando um token - POST /auth/validate --> com o token nos Headers da requisição</strong></summary><br />
 
+https://github.com/GuilhermeSCampos/lexart-fullstack/assets/82980024/0c0416eb-d562-4c45-a4d0-eef09e2820ae
+
+https://github.com/GuilhermeSCampos/lexart-fullstack/assets/82980024/fdcb9b4d-9edc-4e92-b7d5-cd1cee18ffb6
+
  
  
