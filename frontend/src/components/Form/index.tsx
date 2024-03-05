@@ -19,6 +19,8 @@ type props = {
   active?: boolean;
 };
 
+// ... (imports omitidos para brevidade)
+
 const Form = ({
   handleSubmit,
   loading,
@@ -55,49 +57,110 @@ const Form = ({
       }}
     >
       <form
-        className="lg:w-4/12 mx-auto h-full flex flex-col items-center lg:gap-8 gap-4 bg-slate-300 rounded-xl py-8"
+        className="lg:w-4/12 mx-auto h-full flex flex-col items-center justify-center lg:gap-8 gap-4 bg-slate-300 rounded-xl py-8"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <input
-          type="text"
-          placeholder={t("typePhoneName")}
-          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder={t("typePhoneBrand")}
-          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-          required
-          value={brand}
-          onChange={(e) => setBrand(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder={t("typePhoneModel")}
-          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-          required
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder={t("typePhonePrice")}
-          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-          required
-          value={price}
-          onChange={(e) => onChangePrice(e)}
-        />
-        <input
-          type="text"
-          placeholder={t("typePhoneColor")}
-          className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
-          required
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-        />
+        <div className="flex items-center  w-full justify-center">
+          <div className="w-2/12 text-center items-center">
+            <label
+              className="lg:w-1/12 lg:mr-3 text-sm lg:text-lg"
+              htmlFor="name"
+            >
+              {t("name")}
+            </label>
+          </div>
+          <input
+            type="text"
+            id="name"
+            placeholder={t("typePhoneName")}
+            className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div className="flex  items-center  w-full justify-center">
+          <div className="w-2/12 text-center items-center">
+            <label
+              className="w-2/12 lg:w-1/12 lg:mr-3 text-sm lg:text-lg"
+              htmlFor="brand"
+            >
+              {t("brand")}
+            </label>
+          </div>
+
+          <input
+            type="text"
+            id="brand"
+            placeholder={t("typePhoneBrand")}
+            className="border-4 border-slate-400  p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+            required
+            value={brand}
+            onChange={(e) => setBrand(e.target.value)}
+          />
+        </div>
+
+        <div className="flex items-center  w-full justify-center lg:mr-4">
+          <div className="w-2/12 text-center items-center lg:ml-4">
+            <label
+              className="w-2/12 lg:w-1/12 lg:mr-3 text-sm lg:text-lg"
+              htmlFor="model"
+            >
+              {t("model")}
+            </label>
+          </div>
+          <input
+            type="text"
+            id="model"
+            placeholder={t("typePhoneModel")}
+            className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+            required
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+          />
+        </div>
+
+        <div className="flex items-center  w-full justify-center">
+          <div className="w-2/12 text-center items-center">
+            <label
+              className="w-2/12 lg:w-1/12 lg:mr-3 text-sm lg:text-lg"
+              htmlFor="price"
+            >
+              {t("price")}
+            </label>
+          </div>
+          <input
+            type="text"
+            id="price"
+            placeholder={t("typePhonePrice")}
+            className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+            required
+            value={price}
+            onChange={(e) => onChangePrice(e)}
+          />
+        </div>
+
+        <div className="flex items-center  w-full justify-center">
+          <div className="w-2/12 text-center items-center">
+            <label
+              className="w-2/12 lg:w-1/12 lg:mr-3 text-sm lg:text-lg"
+              htmlFor="color"
+            >
+              {t("color")}
+            </label>
+          </div>
+          <input
+            type="text"
+            id="color"
+            placeholder={t("typePhoneColor")}
+            className="border-4 border-slate-400 p-2 rounded-xl w-3/5 hover:border-slate-500 focus:border-slate-600 focus:outline-none transition duration-300"
+            required
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+          />
+        </div>
+
         <button
           className={`bg-slate-500 ${
             type === "edit" && !active ? "bg-stone-400" : "bg-slate-600"
