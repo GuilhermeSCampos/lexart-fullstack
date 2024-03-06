@@ -8,10 +8,14 @@ const rescue = require("express-rescue");
 
 const authRouter = express.Router();
 
+// LOGIN -- POST
+
 authRouter.post("/login", [
   rescue(UserMiddleware.verifyUserSchema),
   rescue(AuthController.login),
 ]);
+
+// VALIDATE TOKEN -- POST
 
 authRouter.post("/validate", [
   rescue(AuthMiddleware.verifyTokenExists),

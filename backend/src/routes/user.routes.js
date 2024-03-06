@@ -6,6 +6,8 @@ const rescue = require("express-rescue");
 
 const userRouter = express.Router();
 
+// REGISTER USER -- POST
+
 userRouter.post("/register", [
   rescue(UserMiddleware.verifyUserSchema),
   rescue(UserController.register),
